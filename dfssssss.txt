@@ -1,0 +1,36 @@
+class Graph:
+    def __init__(self):
+        self.graph = {}
+
+    def add_edge(self, u, v):
+        if u in self.graph:
+            self.graph[u].append(v)
+        else:
+            self.graph[u] = [v]
+
+    def dfs_util(self, node, visited):
+        visited.add(node)
+        print(node, end=" ")
+
+        for neighbor in self.graph.get(node, []):
+            if neighbor not in visited:
+                self.dfs_util(neighbor, visited)
+
+    def dfs(self, start):
+        visited = set()
+        self.dfs_util(start, visited)
+
+def main():
+    g = Graph()
+
+    num_vertices = int(input("Enter the number of vertices: "))
+    for _ in range(num_vertices):
+        u, v = map(int, input("Enter an edge (u v): ").split())
+        g.add_edge(u, v)
+
+    start_node = int(input("Enter the starting node for DFS: "))
+    print("DFS Traversal:")
+    g.dfs(start_node)
+
+if __name__ == "__main__":
+    main()
