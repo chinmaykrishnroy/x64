@@ -2,13 +2,13 @@
 def is_safe(row, col):
     # Check if there is a queen in the same row or column
     for i in range(N):
-        if board[row][i] == 1 or board[i][col] == 1:
+        if chessboard[row][i] == 1 or chessboard[i][col] == 1:
             return False
     # Check diagonals
     for i in range(N):
         for j in range(N):
             if (i + j == row + col) or (i - j == row - col):
-                if board[i][j] == 1:
+                if chessboard[i][j] == 1:
                     return False
     return True
 
@@ -21,14 +21,14 @@ def solve_n_queens(num_queens):
     for row in range(N):
         for col in range(N):
             # Check if it's safe to place a queen at (row, col)
-            if is_safe(row, col) and board[row][col] != 1:
+            if is_safe(row, col) and chessboard[row][col] != 1:
                 # Place the queen at (row, col)
-                board[row][col] = 1
+                chessboard[row][col] = 1
                 # Recur to place rest of the queens
                 if solve_n_queens(num_queens - 1):
                     return True
                 # If placing queen at (row, col) doesn't lead to a solution, backtrack
-                board[row][col] = 0
+                chessboard[row][col] = 0
     return False
 
 # Get input for number of queens
@@ -56,14 +56,14 @@ else:
 def is_safe(row, col):
     # Check each position in the same row and column for a queen
     for i in range(N):
-        if board[row][i] == 1 or board[i][col] == 1:
+        if chessboard[row][i] == 1 or chessboard[i][col] == 1:
             return False  # Return False if a queen is found in the same row or column
     # Check diagonals for a queen
     for i in range(N):
         for j in range(N):
             # Check if the position is on a diagonal of the current position (row, col)
             if (i + j == row + col) or (i - j == row - col):
-                if board[i][j] == 1:
+                if chessboard[i][j] == 1:
                     return False  # Return False if a queen is found on a diagonal
     return True  # Return True if no queens are found in the same row, column, or diagonal
 
@@ -77,11 +77,11 @@ def solve_n_queens(num_queens):
         for col in range(N):
             # Check if placing a queen at (row, col) is safe
             if is_safe(row, col) and board[row][col] != 1:
-                board[row][col] = 1  # Place the queen at (row, col)
+                chessboard[row][col] = 1  # Place the queen at (row, col)
                 # Recursively attempt to place the rest of the queens
                 if solve_n_queens(num_queens - 1):
                     return True  # If successful, return True
-                board[row][col] = 0  # If not, remove the queen and backtrack
+                chessboard[row][col] = 0  # If not, remove the queen and backtrack
     return False  # If no valid placement is found, return False
 
 # Prompt the user to enter the number of queens
